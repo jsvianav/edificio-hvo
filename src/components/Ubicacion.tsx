@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { NEGOCIO } from '../constants/negocio';
+import { Overline } from './Overline';
+import { Revelado } from './Revelado';
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -24,7 +26,7 @@ export function Ubicacion() {
             transition={{ duration: 0.65, ease: EASE }}
             className="lg:col-span-5"
           >
-            <p className="etiqueta mb-6">Ubicación</p>
+            <Overline texto="Ubicación" className="mb-6" />
             <h2 className="font-display font-medium text-3xl lg:text-[2.75rem] leading-[1.12] tracking-[-0.01em] text-tinta mb-5">
               Calle 25 # 38 – 17,
               <br />
@@ -71,7 +73,7 @@ export function Ubicacion() {
             transition={{ delay: 0.1, duration: 0.65, ease: EASE }}
             className="lg:col-span-7"
           >
-            <div className="overflow-hidden border border-linea">
+            <Revelado desde="derecha" className="overflow-hidden border border-linea">
               <iframe
                 title="Mapa de ubicación del Edificio HVO en Tuluá, Valle del Cauca"
                 src={`https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d250.25!2d${NEGOCIO.coordenadas.lng}!3d${NEGOCIO.coordenadas.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNMKwMDUnMDMuMSJOIDc2wrAxMScxNS42Ilc!5e0!3m2!1ses!2sco!4v1700000000000!5m2!1ses!2sco`}
@@ -83,7 +85,7 @@ export function Ubicacion() {
                 referrerPolicy="no-referrer-when-downgrade"
                 className="grayscale hover:grayscale-0 transition-[filter] duration-500 block"
               />
-            </div>
+            </Revelado>
             <figcaption className="flex items-baseline justify-between gap-4 border-t border-linea mt-4 pt-3">
               <span className="font-sans text-xs text-suave">{NEGOCIO.direccion}</span>
               <span className="etiqueta shrink-0">Fig. 02</span>

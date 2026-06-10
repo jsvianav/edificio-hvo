@@ -34,6 +34,15 @@
     scroll-behavior: smooth;
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
+  /* Las anclas no quedan ocultas bajo la navbar fija */
+  section[id] {
+    scroll-margin-top: 4.5rem;
+  }
+
   body {
     font-family: 'Archivo', system-ui, sans-serif;
     background-color: rgb(var(--c-fondo));
@@ -94,6 +103,18 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .cinta-animada { animation: none; }
+}
+
+/* Grano fílmico sutil sobre toda la página — textura de impresión editorial */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
 }
 
 /* Scrollbar discreta, acorde a la paleta */

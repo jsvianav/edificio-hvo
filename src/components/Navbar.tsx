@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Moon, Sun } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { waLink } from '../constants/negocio';
 import { useTheme } from '../hooks/useTheme';
 
@@ -14,12 +14,36 @@ const LINKS = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen]         = useState(false);
+  const [activo, setActivo]     = useState('');
   const { isDark, toggle }      = useTheme();
+
+  // Progreso de lectura — hairline en acento bajo la navbar
+  const { scrollYProgress } = useScroll();
+  const progreso = useSpring(scrollYProgress, { stiffness: 140, damping: 30, mass: 0.4 });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Sección activa: observa el tercio central del viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            setActivo(e.target.id === 'inicio' ? '' : `#${e.target.id}`);
+          }
+        }
+      },
+      { rootMargin: '-40% 0px -55% 0px' }
+    );
+    ['#inicio', ...LINKS.map((l) => l.href)].forEach((href) => {
+      const el = document.querySelector(href);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
   }, []);
 
   const closeMenu = () => setOpen(false);
@@ -49,7 +73,11 @@ export function Navbar() {
             <li key={l.href}>
               <a
                 href={l.href}
-                className="font-sans text-[13px] font-medium text-suave hover:text-tinta underline-offset-[6px] decoration-linea hover:underline transition-colors duration-200"
+                className={`font-sans text-[13px] font-medium underline-offset-[6px] transition-colors duration-200 ${
+                  activo === l.href
+                    ? 'text-tinta underline decoration-acento'
+                    : 'text-suave hover:text-tinta decoration-linea hover:underline'
+                }`}
               >
                 {l.label}
               </a>
@@ -97,13 +125,18 @@ export function Navbar() {
         </div>
       </nav>
 
-      {/* Menú móvil */}
-      <AnimatePresence>
-        {open && (
+      {/* Progreso de lectura */}
+      <motion.div
+        style={{ scaleX: progreso }}
+        className="absolute bottom-[-1px] left-0 right-0 h-[2px] bg-acento origin-left"
+        aria-hidden="true"
+      />
+
+      {/* Menú móvil — entrada animada, cierre instantáneo (sin AnimatePresence) */}
+      {open && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.22, ease: 'easeOut' }}
             className="lg:hidden bg-fondo border-t border-linea overflow-hidden"
           >
@@ -133,8 +166,7 @@ export function Navbar() {
               </li>
             </ul>
           </motion.div>
-        )}
-      </AnimatePresence>
+      )}
     </header>
   );
 }

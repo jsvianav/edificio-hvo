@@ -1,4 +1,7 @@
+import { motion } from 'framer-motion';
 import { NEGOCIO, waLink } from '../constants/negocio';
+
+const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
 const LINKS = [
   { label: 'Inicio',         href: '#inicio' },
@@ -73,6 +76,19 @@ export function Footer() {
               ))}
             </ul>
           </div>
+        </div>
+
+        {/* Wordmark editorial gigante */}
+        <div className="overflow-hidden" aria-hidden="true">
+          <motion.p
+            initial={{ y: '35%', opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 1, ease: EASE }}
+            className="font-display font-medium text-[clamp(4rem,14.5vw,11rem)] leading-[0.95] tracking-[-0.03em] text-linea text-center whitespace-nowrap select-none pb-2"
+          >
+            Edificio HVO
+          </motion.p>
         </div>
 
         {/* Cierre */}

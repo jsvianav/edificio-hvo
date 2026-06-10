@@ -4,6 +4,11 @@ import { waLink, NEGOCIO } from '../constants/negocio';
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
+const LINEAS = [
+  <>¿Listo para mudarte?</>,
+  <em className="font-normal italic text-petroleo-claro">Agenda tu visita hoy.</em>,
+];
+
 export function CTAFinal() {
   return (
     <section id="contacto" className="bg-petroleo-oscuro py-24 lg:py-36">
@@ -20,13 +25,29 @@ export function CTAFinal() {
 
           <div className="grid lg:grid-cols-12 gap-12 items-end">
             <div className="lg:col-span-8">
-              <h2 className="font-display font-medium text-[clamp(2.4rem,5.5vw,4.2rem)] leading-[1.06] tracking-[-0.015em] text-marfil">
-                ¿Listo para mudarte?
-                <br />
-                <em className="font-normal italic text-petroleo-claro">
-                  Agenda tu visita hoy.
-                </em>
-              </h2>
+              {/* whileInView va en el h2 (sin clip) y propaga variants a las líneas:
+                  el span enmascarado nunca "entra en vista" para IntersectionObserver */}
+              <motion.h2
+                initial="oculto"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-80px' }}
+                variants={{ visible: { transition: { staggerChildren: 0.15, delayChildren: 0.1 } } }}
+                className="font-display font-medium text-[clamp(2.4rem,5.5vw,4.2rem)] leading-[1.06] tracking-[-0.015em] text-marfil"
+              >
+                {LINEAS.map((linea, i) => (
+                  <span key={i} className="block overflow-hidden">
+                    <motion.span
+                      className="block pb-[0.08em] -mb-[0.08em]"
+                      variants={{
+                        oculto:  { y: '110%' },
+                        visible: { y: 0, transition: { duration: 0.9, ease: EASE } },
+                      }}
+                    >
+                      {linea}
+                    </motion.span>
+                  </span>
+                ))}
+              </motion.h2>
             </div>
 
             <div className="lg:col-span-4 flex flex-col items-start gap-4">

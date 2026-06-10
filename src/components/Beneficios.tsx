@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Overline } from './Overline';
 
 const BENEFICIOS = [
   {
@@ -34,7 +35,7 @@ export function Beneficios() {
           {/* Encabezado lateral */}
           <div className="lg:col-span-4">
             <div className="lg:sticky lg:top-28">
-              <p className="etiqueta mb-6">Por qué HVO</p>
+              <Overline texto="Por qué HVO" className="mb-6" />
               <h2 className="font-display font-medium text-3xl lg:text-4xl leading-[1.12] tracking-[-0.01em] text-tinta mb-5">
                 Pensado para llegar y&nbsp;vivir.
               </h2>

@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { waLink } from '../constants/negocio';
 import { ImagePlaceholder } from './ImagePlaceholder';
@@ -30,20 +30,28 @@ const DATOS = [
 
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
+  const sinMovimiento = useReducedMotion();
 
   // Parallax sutil: la fachada se desplaza más lento que el scroll
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start start', 'end start'],
   });
-  const y = useTransform(scrollYProgress, [0, 1], ['-4%', '8%']);
+  const parallax = useTransform(scrollYProgress, [0, 1], ['-4%', '8%']);
+  const y = sinMovimiento ? '0%' : parallax;
 
   return (
     <section ref={ref} id="inicio" className="relative bg-fondo overflow-hidden">
 
       {/* Fachada a sangre: cubre la mitad derecha y se funde hacia el centro */}
       {IMGS.heroEdificio && (
-        <div className="hidden lg:block absolute inset-y-0 right-0 w-[52%] overflow-hidden" aria-hidden="true">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.35, duration: 1.2, ease: EASE }}
+          className="hidden lg:block absolute inset-y-0 right-0 w-[52%] overflow-hidden"
+          aria-hidden="true"
+        >
           <motion.div style={{ y }} className="absolute inset-0">
             <img
               src={IMGS.heroEdificio}
@@ -53,7 +61,7 @@ export function Hero() {
             />
           </motion.div>
           <div className="absolute inset-0 fundido-hero" />
-        </div>
+        </motion.div>
       )}
 
       <div className="contenedor relative z-10 pt-28 lg:pt-44 pb-14 lg:pb-16">

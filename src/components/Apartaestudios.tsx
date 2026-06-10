@@ -3,6 +3,8 @@ import { ArrowUpRight } from 'lucide-react';
 import { INCLUIDOS_BASE, waLink } from '../constants/negocio';
 import { ImagePlaceholder } from './ImagePlaceholder';
 import { IMGS } from '../assets/siteImages';
+import { Overline } from './Overline';
+import { Revelado } from './Revelado';
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -41,9 +43,9 @@ export function Apartaestudios() {
       <div className="contenedor">
 
         {/* Encabezado asimétrico */}
+        <Overline texto="Los apartaestudios" className="mb-6" />
         <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-end mb-12 lg:mb-16">
           <div className="lg:col-span-7">
-            <p className="etiqueta mb-6">Los apartaestudios</p>
             <h2 className="font-display font-medium text-3xl lg:text-[2.75rem] leading-[1.1] tracking-[-0.01em] text-tinta">
               Dos modalidades,{' '}
               <em className="font-normal italic text-acento">una sola</em>{' '}
@@ -59,13 +61,26 @@ export function Apartaestudios() {
         {/* Franja: lo que incluyen todos */}
         <div className="border-y border-linea py-7 mb-16 lg:mb-20">
           <p className="etiqueta mb-5">Todos los apartaestudios incluyen</p>
-          <ul className="grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-2.5">
+          <motion.ul
+            initial="oculto"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-40px' }}
+            variants={{ visible: { transition: { staggerChildren: 0.045 } } }}
+            className="grid grid-cols-2 sm:grid-cols-3 gap-x-8 gap-y-2.5"
+          >
             {INCLUIDOS_BASE.map((item) => (
-              <li key={item} className="font-sans text-sm text-tinta leading-snug">
+              <motion.li
+                key={item}
+                variants={{
+                  oculto:  { opacity: 0, y: 10 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: EASE } },
+                }}
+                className="font-sans text-sm text-tinta leading-snug"
+              >
                 {item}
-              </li>
+              </motion.li>
             ))}
-          </ul>
+          </motion.ul>
         </div>
 
         {/* Fichas alternadas */}
@@ -81,7 +96,7 @@ export function Apartaestudios() {
             >
               {/* Imagen */}
               <figure className={`lg:col-span-6 ${m.reverse ? 'lg:order-2 lg:col-start-7' : ''}`}>
-                <div className="overflow-hidden">
+                <Revelado desde={m.reverse ? 'derecha' : 'izquierda'} className="overflow-hidden">
                   {m.imagenSrc ? (
                     <img
                       src={m.imagenSrc}
@@ -92,7 +107,7 @@ export function Apartaestudios() {
                   ) : (
                     <ImagePlaceholder label={m.imagenSlot} className="w-full" aspectRatio="4/3" />
                   )}
-                </div>
+                </Revelado>
               </figure>
 
               {/* Ficha */}
