@@ -99,8 +99,7 @@ export function Hero() {
             variants={fadeUp}
             className="font-sans text-base lg:text-lg text-suave leading-relaxed max-w-md mb-10"
           >
-            Llega con tu maleta y nada más: cama, escritorio, baño privado
-            y alguien que te atiende a cualquier hora, todos los días.
+            Llega con tu maleta y nada más: cama, escritorio, baño privado.
           </motion.p>
 
           <motion.div
