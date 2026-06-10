@@ -75,6 +75,27 @@
   }
 }
 
+/* Fundido de la fachada del hero: se disuelve hacia el centro,
+   el borde superior y el inferior usando el color de fondo del tema */
+.fundido-hero {
+  background:
+    linear-gradient(to right, rgb(var(--c-fondo)) 10%, rgb(var(--c-fondo) / 0) 52%),
+    linear-gradient(to top, rgb(var(--c-fondo)) 3%, rgb(var(--c-fondo) / 0) 26%),
+    linear-gradient(to bottom, rgb(var(--c-fondo) / 0.45) 0%, rgb(var(--c-fondo) / 0) 10%);
+}
+
+/* Cinta tipográfica en bucle continuo */
+@keyframes cinta {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.cinta-animada {
+  animation: cinta 38s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cinta-animada { animation: none; }
+}
+
 /* Scrollbar discreta, acorde a la paleta */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: rgb(var(--c-fondo)); }

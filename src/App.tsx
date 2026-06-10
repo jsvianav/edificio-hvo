@@ -1,5 +1,6 @@
 import { Navbar }         from './components/Navbar';
 import { Hero }           from './components/Hero';
+import { Cinta }          from './components/Cinta';
 import { Beneficios }     from './components/Beneficios';
 import { Apartaestudios } from './components/Apartaestudios';
 import { Galeria }        from './components/Galeria';
@@ -15,6 +16,7 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
+        <Cinta />
         <Beneficios />
         <Apartaestudios />
         <Galeria />
