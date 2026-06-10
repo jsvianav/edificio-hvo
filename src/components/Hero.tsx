@@ -77,7 +77,7 @@ export function Hero() {
           </motion.p>
 
           {/* Titular: revelado línea por línea */}
-          <h1 className="font-display font-medium text-[clamp(2.7rem,6.5vw,4.7rem)] leading-[1.06] tracking-[-0.015em] text-tinta mb-7">
+          <h1 className="font-display font-medium text-[clamp(2.2rem,11vw,4.7rem)] lg:text-[clamp(2.7rem,6.5vw,4.7rem)] leading-[1.06] tracking-[-0.015em] text-tinta mb-7">
             {LINEAS.map((linea, i) => (
               <span key={i} className="block overflow-hidden">
                 <motion.span
@@ -145,14 +145,14 @@ export function Hero() {
               <img
                 src={IMGS.heroEdificio}
                 alt="Fachada del Edificio HVO en Tuluá, Valle del Cauca"
-                className="w-full aspect-[4/5] object-cover object-center"
+                className="w-full aspect-[4/5] sm:aspect-[3/2] object-cover object-center"
                 fetchPriority="high"
               />
             ) : (
               <ImagePlaceholder
                 label="Fachada del edificio — hero-edificio.jpg"
-                className="w-full"
-                aspectRatio="4/5"
+                className="w-full aspect-[4/5] sm:aspect-[3/2]"
+                aspectRatio="auto"
               />
             )}
           </div>

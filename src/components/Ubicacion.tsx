@@ -78,12 +78,11 @@ export function Ubicacion() {
                 title="Mapa de ubicación del Edificio HVO en Tuluá, Valle del Cauca"
                 src={`https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d250.25!2d${NEGOCIO.coordenadas.lng}!3d${NEGOCIO.coordenadas.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNMKwMDUnMDMuMSJOIDc2wrAxMScxNS42Ilc!5e0!3m2!1ses!2sco!4v1700000000000!5m2!1ses!2sco`}
                 width="100%"
-                height="460"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                className="grayscale hover:grayscale-0 transition-[filter] duration-500 block"
+                className="grayscale hover:grayscale-0 transition-[filter] duration-500 block h-[340px] sm:h-[400px] lg:h-[460px] w-full"
               />
             </Revelado>
             <figcaption className="flex items-baseline justify-between gap-4 border-t border-linea mt-4 pt-3">

@@ -197,7 +197,7 @@ export function CTAFinal() {
               whileInView="visible"
               viewport={{ once: true, margin: '-80px' }}
               variants={{ visible: { transition: { staggerChildren: 0.16, delayChildren: 0.1 } } }}
-              className="font-display font-medium text-[clamp(2.4rem,5vw,4rem)] leading-[1.06] tracking-[-0.015em] text-marfil"
+              className="font-display font-medium text-[clamp(2rem,9vw,4rem)] lg:text-[clamp(2.4rem,5vw,4rem)] leading-[1.06] tracking-[-0.015em] text-marfil"
             >
               {LINEAS.map((linea, i) => (
                 <span key={i} className="block overflow-hidden" style={{ perspective: 600 }}>
@@ -241,7 +241,7 @@ export function CTAFinal() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ delay: 0.2, duration: 0.8, ease: EASE }}
-            className="lg:col-span-5 lg:col-start-8"
+            className="w-full max-w-md mx-auto lg:max-w-none lg:mx-0 lg:col-span-5 lg:col-start-8"
           >
             <TarjetaTilt>
               <Conversacion />

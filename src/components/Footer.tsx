@@ -85,7 +85,7 @@ export function Footer() {
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 1, ease: EASE }}
-            className="font-display font-medium text-[clamp(4rem,14.5vw,11rem)] leading-[0.95] tracking-[-0.03em] text-linea text-center whitespace-nowrap select-none pb-2"
+            className="font-display font-medium text-[clamp(2.5rem,13.5vw,11rem)] leading-[0.95] tracking-[-0.03em] text-linea text-center whitespace-nowrap select-none pb-2"
           >
             Edificio HVO
           </motion.p>
