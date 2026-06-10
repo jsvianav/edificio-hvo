@@ -1,94 +1,76 @@
 import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { Sofa, Clock, MapPin, Sun } from 'lucide-react';
 
-const CARDS = [
+const BENEFICIOS = [
   {
-    icon: <Sofa size={28} />,
+    n: '01',
     titulo: 'Totalmente amoblados',
-    desc: 'Llega sin preocupaciones: cama, escritorio, TV, ventilador y todo lo necesario para vivir desde el primer día.',
+    desc: 'Cama, escritorio, televisor, ventilador y todo lo necesario para vivir desde el primer día. Llegas y habitas.',
   },
   {
-    icon: <Clock size={28} />,
+    n: '02',
     titulo: 'Atención 24 horas',
-    desc: 'Alguien siempre disponible para atenderte, cualquier día de la semana, a cualquier hora.',
+    desc: 'Alguien siempre disponible para atenderte, cualquier día de la semana, a cualquier hora. Sin contestadores.',
   },
   {
-    icon: <MapPin size={28} />,
+    n: '03',
     titulo: 'Ubicación inmejorable',
-    desc: 'A pasos del Hospital Departamental Tomás Uribe, zona comercial, transporte y todo lo que necesitas.',
+    desc: 'A pasos del Hospital Departamental Tomás Uribe, la zona comercial y el transporte público de Tuluá.',
   },
   {
-    icon: <Sun size={28} />,
+    n: '04',
     titulo: 'Ambientes iluminados',
-    desc: 'Espacios modernos con pisos de porcelanato, buena iluminación natural y acabados de calidad.',
+    desc: 'Pisos de porcelanato, buena luz natural y acabados cuidados. Espacios que se sienten bien habitados.',
   },
 ];
 
-const container = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
-};
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
-const item = {
-  hidden:  { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE } },
-};
-
 export function Beneficios() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
-
   return (
-    <section id="beneficios" className="bg-white dark:bg-gray-900 py-20 lg:py-28">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="beneficios" className="bg-superficie py-20 lg:py-32">
+      <div className="contenedor">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-10">
 
-        {/* Encabezado */}
-        <div className="text-center mb-14">
-          <span className="inline-block font-inter text-xs font-semibold tracking-widest uppercase text-turquesa-500 mb-3">
-            ¿Por qué elegirnos?
-          </span>
-          <h2 className="font-poppins font-700 text-3xl sm:text-4xl text-carbon dark:text-white mb-4">
-            Todo listo para que te concentres en lo que importa
-          </h2>
-          <p className="font-inter text-carbon/60 dark:text-white/60 max-w-xl mx-auto leading-relaxed">
-            Diseñamos cada apartaestudio pensando en tu comodidad y tranquilidad desde el primer momento.
-          </p>
-        </div>
+          {/* Encabezado lateral */}
+          <div className="lg:col-span-4">
+            <div className="lg:sticky lg:top-28">
+              <p className="etiqueta mb-6">Por qué HVO</p>
+              <h2 className="font-display font-medium text-3xl lg:text-4xl leading-[1.12] tracking-[-0.01em] text-tinta mb-5">
+                Pensado para llegar y&nbsp;vivir.
+              </h2>
+              <p className="font-sans text-sm lg:text-base text-suave leading-relaxed max-w-xs">
+                Cada apartaestudio está resuelto en los detalles para que tú
+                solo te ocupes de lo que viniste a hacer a Tuluá.
+              </p>
+            </div>
+          </div>
 
-        {/* Grid de tarjetas */}
-        <motion.div
-          ref={ref}
-          variants={container}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
-        >
-          {CARDS.map((c) => (
-            <motion.div
-              key={c.titulo}
-              variants={item}
-              className="group relative bg-bruma dark:bg-gray-800 rounded-2xl p-7 border border-piedra-100 dark:border-white/10 hover:border-turquesa-200 dark:hover:border-turquesa-700 hover:shadow-lg transition-all duration-300 overflow-hidden"
-            >
-              {/* Fondo de hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-turquesa-50 dark:from-turquesa-900/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
-
-              <div className="relative z-10">
-                <div className="w-12 h-12 rounded-xl bg-turquesa-100 dark:bg-turquesa-900 text-turquesa-600 dark:text-turquesa-300 flex items-center justify-center mb-5 group-hover:bg-turquesa-500 group-hover:text-white transition-all duration-300">
-                  {c.icon}
+          {/* Lista editorial numerada */}
+          <div className="lg:col-span-7 lg:col-start-6">
+            {BENEFICIOS.map((b, i) => (
+              <motion.article
+                key={b.n}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ delay: i * 0.08, duration: 0.6, ease: EASE }}
+                className="group grid grid-cols-[3rem_1fr] gap-x-4 border-t border-linea py-8 lg:py-9 last:border-b"
+              >
+                <span className="etiqueta pt-2" aria-hidden="true">
+                  {b.n}
+                </span>
+                <div>
+                  <h3 className="font-display font-medium text-xl lg:text-2xl text-tinta mb-2.5 group-hover:text-acento transition-colors duration-300">
+                    {b.titulo}
+                  </h3>
+                  <p className="font-sans text-sm lg:text-[15px] text-suave leading-relaxed max-w-lg">
+                    {b.desc}
+                  </p>
                 </div>
-                <h3 className="font-poppins font-600 text-lg text-carbon dark:text-white mb-2">
-                  {c.titulo}
-                </h3>
-                <p className="font-inter text-sm text-carbon/60 dark:text-white/60 leading-relaxed">
-                  {c.desc}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+              </motion.article>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

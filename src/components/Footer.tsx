@@ -1,98 +1,86 @@
-import { MapPin, Phone, Clock } from 'lucide-react';
 import { NEGOCIO, waLink } from '../constants/negocio';
 
 const LINKS = [
-  { label: 'Inicio',           href: '#inicio' },
-  { label: 'Apartaestudios',   href: '#apartaestudios' },
-  { label: 'Galería',          href: '#galeria' },
-  { label: 'Ubicación',        href: '#ubicacion' },
-  { label: 'Contacto',         href: '#contacto' },
+  { label: 'Inicio',         href: '#inicio' },
+  { label: 'Apartaestudios', href: '#apartaestudios' },
+  { label: 'Galería',        href: '#galeria' },
+  { label: 'Ubicación',      href: '#ubicacion' },
+  { label: 'Contacto',       href: '#contacto' },
 ];
 
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-carbon text-white pt-16 pb-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 pb-12 border-b border-white/10">
+    <footer className="bg-fondo border-t border-linea pt-16 pb-10">
+      <div className="contenedor">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-12 gap-12 pb-14">
 
           {/* Marca */}
-          <div>
-            <div className="flex items-center gap-1 mb-4">
-              <span className="font-poppins font-700 text-xl text-white">Edificio</span>
-              <span className="font-poppins font-800 text-xl text-turquesa-400">HVO</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-turquesa-400 ml-0.5 mt-0.5" />
+          <div className="lg:col-span-5">
+            <div className="flex items-baseline gap-3 mb-5">
+              <span className="font-display font-semibold text-2xl tracking-tight text-tinta leading-none">
+                HVO
+              </span>
+              <span className="etiqueta border-l border-linea pl-3">Edificio</span>
             </div>
-            <p className="font-inter text-sm text-white/55 leading-relaxed max-w-xs">
-              Apartaestudios amoblados en el corazón de Tuluá. Comodidad, independencia y atención las 24 horas.
+            <p className="font-sans text-sm text-suave leading-relaxed max-w-xs">
+              Apartaestudios amoblados en el corazón de Tuluá. Comodidad,
+              independencia y atención las 24 horas.
             </p>
           </div>
 
-          {/* Información de contacto */}
-          <div>
-            <h3 className="font-poppins font-600 text-sm uppercase tracking-widest text-turquesa-400 mb-5">
-              Contacto
-            </h3>
+          {/* Contacto */}
+          <div className="lg:col-span-4 lg:col-start-7">
+            <h3 className="etiqueta mb-6">Contacto</h3>
             <ul className="space-y-3">
-              <li className="flex gap-2.5 items-start">
-                <MapPin size={15} className="text-turquesa-400 mt-0.5 shrink-0" aria-hidden="true" />
-                <span className="font-inter text-sm text-white/60">{NEGOCIO.direccion}</span>
-              </li>
-              <li className="flex gap-2.5 items-center">
-                <Phone size={15} className="text-turquesa-400 shrink-0" aria-hidden="true" />
+              <li className="font-sans text-sm text-suave">{NEGOCIO.direccion}</li>
+              <li>
                 <a
                   href={`tel:${NEGOCIO.telefono.replace(/\s/g, '')}`}
-                  className="font-inter text-sm text-white/60 hover:text-turquesa-300 transition-colors"
+                  className="font-sans text-sm text-tinta hover:text-acento transition-colors duration-200"
                 >
                   {NEGOCIO.telefono}
                 </a>
               </li>
-              <li className="flex gap-2.5 items-center">
-                <Clock size={15} className="text-turquesa-400 shrink-0" aria-hidden="true" />
-                <span className="font-inter text-sm text-white/60">{NEGOCIO.horario}</span>
+              <li className="font-sans text-sm text-suave">{NEGOCIO.horario}</li>
+              <li className="pt-1">
+                <a
+                  href={waLink('general')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-sans text-sm font-medium text-acento hover:text-acento-fuerte transition-colors duration-200"
+                >
+                  Escríbenos por WhatsApp ↗
+                </a>
               </li>
             </ul>
           </div>
 
           {/* Navegación */}
-          <div>
-            <h3 className="font-poppins font-600 text-sm uppercase tracking-widest text-turquesa-400 mb-5">
-              Navegación
-            </h3>
-            <ul className="space-y-2">
+          <div className="lg:col-span-2 lg:col-start-11">
+            <h3 className="etiqueta mb-6">Índice</h3>
+            <ul className="space-y-3">
               {LINKS.map((l) => (
                 <li key={l.href}>
                   <a
                     href={l.href}
-                    className="font-inter text-sm text-white/55 hover:text-turquesa-300 transition-colors"
+                    className="font-sans text-sm text-suave hover:text-tinta transition-colors duration-200"
                   >
                     {l.label}
                   </a>
                 </li>
               ))}
-              <li className="pt-2">
-                <a
-                  href={waLink('general')}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-inter text-sm text-whatsapp hover:text-green-300 transition-colors font-medium"
-                >
-                  → Escríbenos por WhatsApp
-                </a>
-              </li>
             </ul>
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-8">
-          <p className="font-inter text-xs text-white/30">
+        {/* Cierre */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-baseline justify-between gap-2 border-t border-linea pt-6">
+          <p className="font-sans text-xs text-suave/80">
             © {year} Edificio HVO. Todos los derechos reservados.
           </p>
-          <p className="font-inter text-xs text-white/25">
-            Tuluá, Valle del Cauca, Colombia
-          </p>
+          <p className="etiqueta">Tuluá · Valle del Cauca · Colombia</p>
         </div>
       </div>
     </footer>

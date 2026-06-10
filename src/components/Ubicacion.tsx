@@ -1,101 +1,94 @@
 import { motion } from 'framer-motion';
-import { MapPin, ExternalLink, Hospital, ShoppingBag, Bus } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { NEGOCIO } from '../constants/negocio';
 
+const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
+
 const REFERENCIAS = [
-  { icon: <Hospital size={16} />, label: 'Hospital Departamental Tomás Uribe' },
-  { icon: <ShoppingBag size={16} />, label: 'Zona comercial de Tuluá' },
-  { icon: <Bus size={16} />,      label: 'Acceso a transporte público' },
+  { lugar: 'Hospital Departamental Tomás Uribe', nota: 'a pasos' },
+  { lugar: 'Zona comercial de Tuluá',            nota: 'caminando' },
+  { lugar: 'Transporte público',                 nota: 'en la puerta' },
 ];
 
 export function Ubicacion() {
   return (
-    <section id="ubicacion" className="bg-bruma dark:bg-gray-950 py-20 lg:py-28">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="ubicacion" className="bg-fondo py-20 lg:py-32">
+      <div className="contenedor">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-10 items-start">
 
-        {/* Encabezado */}
-        <div className="text-center mb-14">
-          <span className="inline-block font-inter text-xs font-semibold tracking-widest uppercase text-turquesa-500 mb-3">
-            Ubicación
-          </span>
-          <h2 className="font-poppins font-700 text-3xl sm:text-4xl text-carbon dark:text-white mb-4">
-            En el centro de todo
-          </h2>
-          <p className="font-inter text-carbon/60 dark:text-white/60 max-w-lg mx-auto leading-relaxed">
-            Estratégicamente ubicado para que tengas todo cerca: salud, comercio y transporte a pocos pasos.
-          </p>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-10 items-center">
-
-          {/* Info de ubicación */}
+          {/* Columna editorial */}
           <motion.div
-            initial={{ opacity: 0, x: -24 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-            className="space-y-6"
+            transition={{ duration: 0.65, ease: EASE }}
+            className="lg:col-span-5"
           >
-            {/* Dirección */}
-            <div className="flex gap-4 items-start">
-              <div className="w-10 h-10 rounded-xl bg-turquesa-100 dark:bg-turquesa-900 text-turquesa-600 dark:text-turquesa-300 flex items-center justify-center shrink-0 mt-0.5">
-                <MapPin size={20} aria-hidden="true" />
-              </div>
-              <div>
-                <p className="font-poppins font-600 text-carbon dark:text-white mb-0.5">Dirección</p>
-                <p className="font-inter text-carbon/70 dark:text-white/70 text-sm">{NEGOCIO.direccion}</p>
-                <p className="font-inter text-piedra-400 dark:text-gray-500 text-xs mt-1">
-                  Código Plus: {NEGOCIO.codigoPlus}
-                </p>
-              </div>
-            </div>
+            <p className="etiqueta mb-6">Ubicación</p>
+            <h2 className="font-display font-medium text-3xl lg:text-[2.75rem] leading-[1.12] tracking-[-0.01em] text-tinta mb-5">
+              Calle 25 # 38 – 17,
+              <br />
+              centro de Tuluá.
+            </h2>
+            <p className="font-sans text-sm lg:text-[15px] text-suave leading-relaxed max-w-sm mb-10">
+              En el centro de todo: salud, comercio y transporte quedan a
+              pocos pasos de la puerta del edificio.
+            </p>
 
-            {/* Referencias */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-piedra-100 dark:border-white/10 space-y-4">
-              <p className="font-poppins font-600 text-carbon dark:text-white text-sm mb-2">
-                Cerca de:
-              </p>
+            {/* Referencias cercanas */}
+            <ul className="mb-10">
               {REFERENCIAS.map((r) => (
-                <div key={r.label} className="flex items-center gap-3">
-                  <span className="text-turquesa-500" aria-hidden="true">{r.icon}</span>
-                  <span className="font-inter text-sm text-carbon/75 dark:text-white/75">{r.label}</span>
-                </div>
+                <li
+                  key={r.lugar}
+                  className="flex items-baseline justify-between gap-6 border-t border-linea py-3.5 last:border-b"
+                >
+                  <span className="font-sans text-sm text-tinta">{r.lugar}</span>
+                  <span className="font-sans text-xs text-suave shrink-0">— {r.nota}</span>
+                </li>
               ))}
+            </ul>
+
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
+              <a
+                href={NEGOCIO.googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-acento hover:bg-acento-fuerte text-acento-contraste font-sans font-medium text-sm tracking-wide px-7 py-3.5 rounded-full transition-colors duration-200"
+                aria-label="Cómo llegar al Edificio HVO en Google Maps"
+              >
+                Cómo llegar
+                <ArrowUpRight size={15} aria-hidden="true" />
+              </a>
+              <span className="etiqueta">Plus Code {NEGOCIO.codigoPlus}</span>
             </div>
-
-            {/* Botón Cómo llegar */}
-            <a
-              href={NEGOCIO.googleMapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-turquesa-500 hover:bg-turquesa-600 text-white font-inter font-semibold text-sm px-6 py-3 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg"
-              aria-label="Cómo llegar al Edificio HVO en Google Maps"
-            >
-              <MapPin size={16} aria-hidden="true" />
-              Cómo llegar
-              <ExternalLink size={14} aria-hidden="true" />
-            </a>
           </motion.div>
 
-          {/* Mapa embebido */}
-          <motion.div
-            initial={{ opacity: 0, x: 24 }}
-            whileInView={{ opacity: 1, x: 0 }}
+          {/* Mapa */}
+          <motion.figure
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
-            className="rounded-3xl overflow-hidden shadow-xl border border-piedra-100 dark:border-white/10 bg-white dark:bg-gray-800"
+            transition={{ delay: 0.1, duration: 0.65, ease: EASE }}
+            className="lg:col-span-7"
           >
-            <iframe
-              title="Mapa de ubicación del Edificio HVO en Tuluá, Valle del Cauca"
-              src={`https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d250.25!2d${NEGOCIO.coordenadas.lng}!3d${NEGOCIO.coordenadas.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNMKwMDUnMDMuMSJOIDc2wrAxMScxNS42Ilc!5e0!3m2!1ses!2sco!4v1700000000000!5m2!1ses!2sco`}
-              width="100%"
-              height="380"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </motion.div>
+            <div className="overflow-hidden border border-linea">
+              <iframe
+                title="Mapa de ubicación del Edificio HVO en Tuluá, Valle del Cauca"
+                src={`https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d250.25!2d${NEGOCIO.coordenadas.lng}!3d${NEGOCIO.coordenadas.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNMKwMDUnMDMuMSJOIDc2wrAxMScxNS42Ilc!5e0!3m2!1ses!2sco!4v1700000000000!5m2!1ses!2sco`}
+                width="100%"
+                height="460"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="grayscale hover:grayscale-0 transition-[filter] duration-500 block"
+              />
+            </div>
+            <figcaption className="flex items-baseline justify-between gap-4 border-t border-linea mt-4 pt-3">
+              <span className="font-sans text-xs text-suave">{NEGOCIO.direccion}</span>
+              <span className="etiqueta shrink-0">Fig. 02</span>
+            </figcaption>
+          </motion.figure>
         </div>
       </div>
     </section>

@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, MessageCircle, Moon, Sun } from 'lucide-react';
+import { Menu, X, Moon, Sun } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { waLink } from '../constants/negocio';
 import { useTheme } from '../hooks/useTheme';
 
 const LINKS = [
-  { label: 'Inicio',           href: '#inicio' },
-  { label: 'Apartaestudios',   href: '#apartaestudios' },
-  { label: 'Galería',          href: '#galeria' },
-  { label: 'Ubicación',        href: '#ubicacion' },
-  { label: 'Contacto',         href: '#contacto' },
+  { label: 'Apartaestudios', href: '#apartaestudios' },
+  { label: 'Galería',        href: '#galeria' },
+  { label: 'Ubicación',      href: '#ubicacion' },
+  { label: 'Reseñas',        href: '#resenas' },
 ];
 
 export function Navbar() {
@@ -18,7 +17,7 @@ export function Navbar() {
   const { isDark, toggle }      = useTheme();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -29,55 +28,52 @@ export function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm border-b border-piedra-100 dark:border-white/10'
-          : 'bg-transparent'
+          ? 'bg-fondo/95 backdrop-blur-sm border-b border-linea'
+          : 'bg-fondo border-b border-transparent'
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <a href="#inicio" className="flex items-center gap-1 group" aria-label="Edificio HVO inicio">
-          <span className="font-poppins font-700 text-xl tracking-tight text-carbon dark:text-white group-hover:text-turquesa-600 transition-colors">
-            Edificio
-          </span>
-          <span className="font-poppins font-800 text-xl tracking-tight text-turquesa-500">
+      <nav className="contenedor h-16 lg:h-[72px] flex items-center justify-between">
+        {/* Wordmark */}
+        <a href="#inicio" className="flex items-baseline gap-3 group" aria-label="Edificio HVO — inicio">
+          <span className="font-display font-semibold text-[1.45rem] tracking-tight text-tinta leading-none">
             HVO
           </span>
-          <span className="w-1.5 h-1.5 rounded-full bg-turquesa-400 ml-0.5 mt-0.5" aria-hidden="true" />
+          <span className="hidden sm:block etiqueta border-l border-linea pl-3">
+            Edificio · Tuluá
+          </span>
         </a>
 
         {/* Navegación desktop */}
-        <ul className="hidden lg:flex items-center gap-8">
+        <ul className="hidden lg:flex items-center gap-9">
           {LINKS.map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}
-                className="font-inter text-sm font-medium text-carbon/70 dark:text-white/70 hover:text-turquesa-600 dark:hover:text-turquesa-400 transition-colors relative group"
+                className="font-sans text-[13px] font-medium text-suave hover:text-tinta underline-offset-[6px] decoration-linea hover:underline transition-colors duration-200"
               >
                 {l.label}
-                <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-turquesa-400 rounded-full group-hover:w-full transition-all duration-300" />
               </a>
             </li>
           ))}
         </ul>
 
         {/* Controles desktop */}
-        <div className="hidden lg:flex items-center gap-2">
+        <div className="hidden lg:flex items-center gap-4">
           <button
             onClick={toggle}
-            className="p-2 rounded-xl text-carbon/70 dark:text-white/70 hover:text-turquesa-600 dark:hover:text-turquesa-400 hover:bg-turquesa-50 dark:hover:bg-white/10 transition-colors"
+            className="p-2 text-suave hover:text-tinta transition-colors duration-200"
             aria-label={isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
           >
-            {isDark ? <Sun size={20} /> : <Moon size={20} />}
+            {isDark ? <Sun size={17} /> : <Moon size={17} />}
           </button>
           <a
             href={waLink('general')}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-whatsapp hover:bg-green-500 text-white text-sm font-inter font-semibold px-4 py-2 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md"
+            className="inline-flex items-center bg-acento hover:bg-acento-fuerte text-acento-contraste text-[13px] font-medium tracking-wide px-5 py-2.5 rounded-full transition-colors duration-200"
             aria-label="Escríbenos por WhatsApp"
           >
-            <MessageCircle size={16} aria-hidden="true" />
-            WhatsApp
+            Escríbenos
           </a>
         </div>
 
@@ -85,18 +81,18 @@ export function Navbar() {
         <div className="lg:hidden flex items-center gap-1">
           <button
             onClick={toggle}
-            className="p-2 rounded-xl text-carbon dark:text-white hover:text-turquesa-600 dark:hover:text-turquesa-400 hover:bg-turquesa-50 dark:hover:bg-white/10 transition-colors"
+            className="p-2 text-suave hover:text-tinta transition-colors"
             aria-label={isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
           >
-            {isDark ? <Sun size={20} /> : <Moon size={20} />}
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
           </button>
           <button
-            className="p-2 rounded-xl text-carbon dark:text-white hover:text-turquesa-600 hover:bg-turquesa-50 dark:hover:bg-white/10 transition-colors"
+            className="p-2 text-tinta"
             onClick={() => setOpen((o) => !o)}
             aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={open}
           >
-            {open ? <X size={22} /> : <Menu size={22} />}
+            {open ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </nav>
@@ -108,31 +104,30 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.22 }}
-            className="lg:hidden bg-white dark:bg-gray-900 border-t border-piedra-100 dark:border-white/10 overflow-hidden"
+            transition={{ duration: 0.22, ease: 'easeOut' }}
+            className="lg:hidden bg-fondo border-t border-linea overflow-hidden"
           >
-            <ul className="px-4 py-3 space-y-1">
+            <ul className="contenedor py-4 divide-y divide-linea">
               {LINKS.map((l) => (
                 <li key={l.href}>
                   <a
                     href={l.href}
                     onClick={closeMenu}
-                    className="block py-2.5 px-3 rounded-xl font-inter text-sm font-medium text-carbon/80 dark:text-white/80 hover:text-turquesa-600 dark:hover:text-turquesa-400 hover:bg-turquesa-50 dark:hover:bg-white/10 transition-colors"
+                    className="block py-3.5 font-sans text-sm text-tinta"
                   >
                     {l.label}
                   </a>
                 </li>
               ))}
-              <li className="pt-2">
+              <li className="py-4">
                 <a
                   href={waLink('general')}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={closeMenu}
-                  className="flex items-center justify-center gap-2 w-full bg-whatsapp text-white text-sm font-inter font-semibold py-3 rounded-xl transition-all"
+                  className="inline-flex items-center justify-center w-full bg-acento text-acento-contraste text-sm font-medium py-3.5 rounded-full"
                   aria-label="Escríbenos por WhatsApp"
                 >
-                  <MessageCircle size={16} aria-hidden="true" />
                   Escríbenos por WhatsApp
                 </a>
               </li>

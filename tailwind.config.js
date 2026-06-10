@@ -7,38 +7,29 @@ export default {
   ],
   theme: {
     extend: {
+      // Tokens semánticos — los valores reales viven en src/index.css
+      // y cambian automáticamente en modo oscuro (.dark)
       colors: {
-        turquesa: {
-          50:  '#EAFBFC',
-          100: '#C9F3F6',
-          200: '#9AE7EC',
-          300: '#5FD3DB',
-          400: '#2DBDC7',
-          500: '#16B3BC',
-          600: '#0E929A',
-          700: '#0C757C',
-          800: '#0D5C61',
-          900: '#0F4B4F',
+        fondo:      'rgb(var(--c-fondo) / <alpha-value>)',
+        superficie: 'rgb(var(--c-superficie) / <alpha-value>)',
+        elevada:    'rgb(var(--c-elevada) / <alpha-value>)',
+        tinta:      'rgb(var(--c-tinta) / <alpha-value>)',
+        suave:      'rgb(var(--c-suave) / <alpha-value>)',
+        linea:      'rgb(var(--c-linea) / <alpha-value>)',
+        acento:     'rgb(var(--c-acento) / <alpha-value>)',
+        'acento-fuerte':    'rgb(var(--c-acento-fuerte) / <alpha-value>)',
+        'acento-contraste': 'rgb(var(--c-acento-contraste) / <alpha-value>)',
+        // Valores fijos (no cambian con el tema) — sección de contacto y botones sobre petróleo
+        petroleo: {
+          DEFAULT: '#1C4742',
+          oscuro:  '#12332F',
+          claro:   '#9DBFB6',
         },
-        piedra: {
-          50:  '#F7F4EF',
-          100: '#EDE7DE',
-          200: '#DAD0C2',
-          300: '#C2B4A0',
-          400: '#A8987F',
-          500: '#8E7E66',
-          600: '#6E6151',
-          700: '#544A3E',
-          800: '#3B342C',
-          900: '#26211C',
-        },
-        carbon:   '#1A2024',
-        bruma:    '#F7F9F9',
-        whatsapp: '#25D366',
+        marfil: '#F5F2EA',
       },
       fontFamily: {
-        poppins: ['Poppins', 'sans-serif'],
-        inter:   ['Inter', 'sans-serif'],
+        display: ['Fraunces', 'Georgia', 'serif'],
+        sans:    ['Archivo', 'system-ui', 'sans-serif'],
       },
     },
   },

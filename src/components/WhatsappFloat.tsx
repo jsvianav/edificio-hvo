@@ -9,23 +9,13 @@ export function WhatsappFloat() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Escríbenos por WhatsApp — Edificio HVO"
+      title="Escríbenos por WhatsApp"
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
-      transition={{ delay: 1.5, type: 'spring', stiffness: 260, damping: 20 }}
-      className="fixed bottom-6 right-5 z-50 flex items-center gap-2.5 bg-whatsapp text-white py-3 px-4 rounded-2xl shadow-2xl hover:shadow-green-500/30 wa-pulse hover:scale-105 transition-transform duration-200 group"
+      transition={{ delay: 1.4, type: 'spring', stiffness: 260, damping: 22 }}
+      className="fixed bottom-6 right-5 z-50 flex items-center justify-center w-[52px] h-[52px] bg-acento hover:bg-acento-fuerte text-acento-contraste rounded-full shadow-lg shadow-tinta/15 hover:scale-105 transition-[background-color,transform] duration-200"
     >
       <MessageCircle size={22} aria-hidden="true" />
-      <span className="font-inter font-semibold text-sm hidden sm:inline">
-        WhatsApp
-      </span>
-
-      {/* Tooltip en móvil */}
-      <span
-        className="sm:hidden absolute right-14 bottom-1 bg-carbon text-white text-xs font-inter px-2.5 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none shadow-lg"
-        aria-hidden="true"
-      >
-        Escríbenos
-      </span>
     </motion.a>
   );
 }

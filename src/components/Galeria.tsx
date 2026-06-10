@@ -4,112 +4,127 @@ import { X } from 'lucide-react';
 import { ImagePlaceholder } from './ImagePlaceholder';
 import { IMGS } from '../assets/siteImages';
 
+const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
+
 const FOTOS = [
   {
-    src:   IMGS.heroEdificio,
-    slot:  'hero-edificio.jpg',
-    alt:   'Fachada exterior del Edificio HVO en Tuluá',
-    label: 'Fachada del Edificio HVO',
-    desc:  'Vista exterior — fachada turquesa con enchape de piedra',
-    span:  'lg:col-span-2 lg:row-span-2',
+    src:    IMGS.heroEdificio,
+    slot:   'hero-edificio.jpg',
+    alt:    'Fachada exterior del Edificio HVO en Tuluá',
+    label:  'Fachada del edificio',
+    desc:   'Enchape de piedra y carpintería turquesa',
+    span:   'lg:col-span-7',
+    aspect: 'aspect-[16/10]',
   },
   {
-    src:   IMGS.habitacion1,
-    slot:  'habitacion-1.jpg',
-    alt:   'Habitación del apartaestudio con cama, cabecero gris y televisor',
-    label: 'Habitación con cama y TV',
-    desc:  'Cama, cabecero, mesa de noche con lámpara y TV de pared',
-    span:  '',
+    src:    IMGS.habitacion1,
+    slot:   'habitacion-1.jpg',
+    alt:    'Habitación del apartaestudio con cama, cabecero gris y televisor',
+    label:  'Habitación principal',
+    desc:   'Cama, cabecero, mesa de noche y TV',
+    span:   'lg:col-span-5',
+    aspect: 'aspect-[4/3]',
   },
   {
-    src:   IMGS.estudioEscritorio,
-    slot:  'estudio-escritorio.jpg',
-    alt:   'Zona de escritorio con silla y cortinas en el apartaestudio',
-    label: 'Zona de escritorio',
-    desc:  'Escritorio, silla y cortinas — espacio ideal para trabajar o estudiar',
-    span:  '',
+    src:    IMGS.estudioEscritorio,
+    slot:   'estudio-escritorio.jpg',
+    alt:    'Zona de escritorio con silla y cortinas en el apartaestudio',
+    label:  'Zona de trabajo',
+    desc:   'Escritorio y silla junto a la ventana',
+    span:   'lg:col-span-5',
+    aspect: 'aspect-[4/3]',
   },
   {
-    src:   IMGS.zonaComun,
-    slot:  'zona-comun.jpg',
-    alt:   'Zona común del Edificio HVO con pérgola de madera y jardín vertical',
-    label: 'Zona común del edificio',
-    desc:  'Corredor con pérgola de madera, jardín vertical y barandas en acero',
-    span:  'lg:col-span-2',
+    src:    IMGS.zonaComun,
+    slot:   'zona-comun.jpg',
+    alt:    'Zona común del Edificio HVO con pérgola de madera y jardín vertical',
+    label:  'Zona común',
+    desc:   'Pérgola de madera y jardín vertical',
+    span:   'lg:col-span-7',
+    aspect: 'aspect-[16/10]',
   },
   {
-    src:   null,
-    slot:  'bano.jpg',
-    alt:   'Baño moderno del apartaestudio en el Edificio HVO',
-    label: 'Baño moderno',
-    desc:  'Baño con acabados modernos incluido en cada apartaestudio',
-    span:  '',
+    src:    null,
+    slot:   'bano.jpg',
+    alt:    'Baño moderno del apartaestudio en el Edificio HVO',
+    label:  'Baño privado',
+    desc:   'Acabados modernos en cada unidad',
+    span:   'lg:col-span-5 lg:col-start-8',
+    aspect: 'aspect-[4/3]',
   },
 ];
+
+const num = (i: number) => String(i + 1).padStart(2, '0');
 
 export function Galeria() {
   const [selected, setSelected] = useState<number | null>(null);
 
   return (
-    <section id="galeria" className="bg-white dark:bg-gray-900 py-20 lg:py-28">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="galeria" className="bg-superficie py-20 lg:py-32">
+      <div className="contenedor">
 
         {/* Encabezado */}
-        <div className="text-center mb-14">
-          <span className="inline-block font-inter text-xs font-semibold tracking-widest uppercase text-turquesa-500 mb-3">
-            Galería
-          </span>
-          <h2 className="font-poppins font-700 text-3xl sm:text-4xl text-carbon dark:text-white mb-4">
-            Conoce el Edificio HVO
-          </h2>
-          <p className="font-inter text-carbon/60 dark:text-white/60 max-w-md mx-auto">
-            Espacios pensados para tu bienestar. Modernos, iluminados y completamente equipados.
+        <div className="flex flex-wrap items-end justify-between gap-6 mb-12 lg:mb-16">
+          <div>
+            <p className="etiqueta mb-6">Galería</p>
+            <h2 className="font-display font-medium text-3xl lg:text-[2.75rem] leading-[1.1] tracking-[-0.01em] text-tinta">
+              El edificio, tal como es.
+            </h2>
+          </div>
+          <p className="font-sans text-sm text-suave max-w-xs leading-relaxed">
+            Espacios modernos, iluminados y completamente equipados —
+            sin retoques de catálogo.
           </p>
         </div>
 
-        {/* Grid masonry-like */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 auto-rows-[220px]">
+        {/* Mosaico editorial */}
+        <div className="grid lg:grid-cols-12 gap-x-6 gap-y-12 items-start">
           {FOTOS.map((foto, i) => (
-            <motion.button
+            <motion.figure
               key={foto.slot}
-              initial={{ opacity: 0, scale: 0.96 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
-              transition={{ delay: i * 0.08, duration: 0.5 }}
-              onClick={() => setSelected(i)}
-              className={`group relative rounded-2xl overflow-hidden cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-turquesa-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900 ${foto.span}`}
-              aria-label={`Ver foto: ${foto.label}`}
+              transition={{ delay: (i % 2) * 0.1, duration: 0.6, ease: EASE }}
+              className={foto.span}
             >
-              {foto.src ? (
-                <img
-                  src={foto.src}
-                  alt={foto.alt}
-                  className="w-full h-full object-cover object-center"
-                  loading="lazy"
-                />
-              ) : (
-                <ImagePlaceholder
-                  label={`${foto.slot} — ${foto.desc}`}
-                  className="w-full h-full"
-                  aspectRatio="auto"
-                />
-              )}
-
-              {/* Overlay hover */}
-              <div className="absolute inset-0 bg-gradient-to-t from-carbon/80 via-carbon/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end p-4">
-                <div>
-                  <p className="font-poppins font-600 text-white text-sm">{foto.label}</p>
-                  <p className="font-inter text-white/70 text-xs mt-0.5">{foto.desc}</p>
-                </div>
-              </div>
-            </motion.button>
+              <button
+                onClick={() => setSelected(i)}
+                className="group block w-full overflow-hidden cursor-zoom-in"
+                aria-label={`Ver foto: ${foto.label}`}
+              >
+                {foto.src ? (
+                  <img
+                    src={foto.src}
+                    alt={foto.alt}
+                    className={`w-full ${foto.aspect} object-cover object-center group-hover:scale-[1.025] transition-transform duration-700 ease-out`}
+                    loading="lazy"
+                  />
+                ) : (
+                  <ImagePlaceholder
+                    label={`${foto.slot} — ${foto.desc}`}
+                    className={`w-full ${foto.aspect}`}
+                    aspectRatio="auto"
+                  />
+                )}
+              </button>
+              <figcaption className="flex items-baseline justify-between gap-4 border-t border-linea mt-4 pt-3">
+                <span className="font-sans text-xs text-tinta">
+                  <span className="etiqueta mr-2">{num(i)}</span>
+                  {foto.label}
+                </span>
+                <span className="font-sans text-xs text-suave text-right hidden sm:block">
+                  {foto.desc}
+                </span>
+              </figcaption>
+            </motion.figure>
           ))}
         </div>
 
         {/* Nota: visible solo mientras haya placeholders */}
         {FOTOS.some(f => !f.src) && (
-          <p className="text-center font-inter text-xs text-piedra-400 dark:text-gray-500 mt-6">
-            Pronto: fotos reales del edificio — copia los archivos .jpg en src/img/ para activarlas
+          <p className="font-sans text-xs text-suave mt-10">
+            Pronto: fotos reales del edificio — copia los archivos .jpg en src/img/ para activarlas.
           </p>
         )}
       </div>
@@ -121,14 +136,14 @@ export function Galeria() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-carbon/95 backdrop-blur-sm flex items-center justify-center p-4"
+            className="fixed inset-0 z-[100] bg-petroleo-oscuro/95 backdrop-blur-sm flex items-center justify-center p-5"
             onClick={() => setSelected(null)}
           >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
+            <motion.figure
+              initial={{ scale: 0.96, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.25 }}
+              exit={{ scale: 0.96, opacity: 0 }}
+              transition={{ duration: 0.25, ease: EASE }}
               className="relative max-w-4xl w-full"
               onClick={(e) => e.stopPropagation()}
             >
@@ -136,26 +151,32 @@ export function Galeria() {
                 <img
                   src={FOTOS[selected].src!}
                   alt={FOTOS[selected].alt}
-                  className="w-full rounded-2xl object-cover object-center max-h-[80vh]"
+                  className="w-full object-cover object-center max-h-[78vh]"
                 />
               ) : (
                 <ImagePlaceholder
                   label={`${FOTOS[selected].slot} — ${FOTOS[selected].desc}`}
-                  className="w-full rounded-2xl"
+                  className="w-full"
                   aspectRatio="16/9"
                 />
               )}
+              <figcaption className="flex items-baseline justify-between gap-4 border-t border-marfil/20 mt-4 pt-3">
+                <span className="font-sans text-sm text-marfil">
+                  <span className="font-sans text-[11px] uppercase tracking-[0.22em] text-marfil/50 mr-3">
+                    {num(selected)}
+                  </span>
+                  {FOTOS[selected].label}
+                </span>
+                <span className="font-sans text-xs text-marfil/60">{FOTOS[selected].desc}</span>
+              </figcaption>
               <button
                 onClick={() => setSelected(null)}
-                className="absolute -top-3 -right-3 w-9 h-9 bg-white rounded-full flex items-center justify-center shadow-lg text-carbon hover:text-turquesa-600 transition-colors"
+                className="absolute top-4 right-4 w-10 h-10 bg-marfil text-petroleo-oscuro rounded-full flex items-center justify-center hover:scale-105 transition-transform"
                 aria-label="Cerrar imagen"
               >
-                <X size={18} />
+                <X size={17} />
               </button>
-              <p className="text-center text-white/70 font-inter text-sm mt-4">
-                {FOTOS[selected].label}
-              </p>
-            </motion.div>
+            </motion.figure>
           </motion.div>
         )}
       </AnimatePresence>
