@@ -53,8 +53,8 @@ function TarjetaModalidad({ tipo, featured = false, delay = 0 }: ModalidadProps)
       transition={{ delay, duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
       className={`relative flex flex-col rounded-3xl overflow-hidden border transition-all duration-300 ${
         featured
-          ? 'border-turquesa-300 shadow-xl shadow-turquesa-100'
-          : 'border-piedra-200 shadow-md hover:shadow-xl'
+          ? 'border-turquesa-300 dark:border-turquesa-600 shadow-xl shadow-turquesa-100 dark:shadow-turquesa-900/20'
+          : 'border-piedra-200 dark:border-white/10 shadow-md hover:shadow-xl'
       }`}
     >
       {/* Badge destacado */}
@@ -90,44 +90,44 @@ function TarjetaModalidad({ tipo, featured = false, delay = 0 }: ModalidadProps)
       </div>
 
       {/* Contenido */}
-      <div className="flex flex-col flex-1 p-7 bg-white">
+      <div className="flex flex-col flex-1 p-7 bg-white dark:bg-gray-900">
         <div className="mb-1">
           <span className="font-inter text-xs font-semibold tracking-widest uppercase text-turquesa-500">
             {d.subtitulo}
           </span>
         </div>
-        <h3 className="font-poppins font-700 text-2xl text-carbon mb-3">
+        <h3 className="font-poppins font-700 text-2xl text-carbon dark:text-white mb-3">
           {d.titulo}
         </h3>
-        <p className="font-inter text-carbon/65 text-sm leading-relaxed mb-6">
+        <p className="font-inter text-carbon/65 dark:text-white/65 text-sm leading-relaxed mb-6">
           {d.descripcion}
         </p>
 
         {/* Lista de incluidos base */}
         <div className="mb-4">
-          <p className="font-inter text-xs font-semibold uppercase tracking-widest text-piedra-500 mb-3">
+          <p className="font-inter text-xs font-semibold uppercase tracking-widest text-piedra-500 dark:text-gray-400 mb-3">
             Incluye en ambas modalidades
           </p>
           <ul className="grid grid-cols-1 gap-1.5">
             {INCLUIDOS_BASE.map((item) => (
               <li key={item} className="flex items-center gap-2">
                 <Check size={14} className="text-turquesa-500 shrink-0" aria-hidden="true" />
-                <span className="font-inter text-sm text-carbon/75">{item}</span>
+                <span className="font-inter text-sm text-carbon/75 dark:text-white/75">{item}</span>
               </li>
             ))}
           </ul>
         </div>
 
         {/* Extras específicos de esta modalidad */}
-        <div className="mb-6 border-t border-piedra-100 pt-4">
-          <p className="font-inter text-xs font-semibold uppercase tracking-widest text-piedra-500 mb-3">
+        <div className="mb-6 border-t border-piedra-100 dark:border-white/10 pt-4">
+          <p className="font-inter text-xs font-semibold uppercase tracking-widest text-piedra-500 dark:text-gray-400 mb-3">
             Características propias
           </p>
           <ul className="space-y-1.5">
             {d.extras.map((e) => (
               <li key={e} className="flex items-center gap-2">
                 <Check size={14} className="text-turquesa-500 shrink-0" aria-hidden="true" />
-                <span className="font-inter text-sm font-medium text-carbon">{e}</span>
+                <span className="font-inter text-sm font-medium text-carbon dark:text-white">{e}</span>
               </li>
             ))}
           </ul>
@@ -142,7 +142,7 @@ function TarjetaModalidad({ tipo, featured = false, delay = 0 }: ModalidadProps)
             className={`flex items-center justify-center gap-2 w-full py-3.5 rounded-2xl font-inter font-semibold text-sm transition-all duration-200 ${
               featured
                 ? 'bg-whatsapp hover:bg-green-400 text-white shadow-md hover:shadow-lg'
-                : 'bg-turquesa-50 hover:bg-turquesa-500 text-turquesa-700 hover:text-white border border-turquesa-200 hover:border-transparent'
+                : 'bg-turquesa-50 dark:bg-turquesa-900/30 hover:bg-turquesa-500 text-turquesa-700 dark:text-turquesa-300 hover:text-white border border-turquesa-200 dark:border-turquesa-700 hover:border-transparent'
             }`}
             aria-label={`Consultar disponibilidad: apartaestudio ${d.titulo}`}
           >
@@ -160,7 +160,7 @@ export function Apartaestudios() {
   const inView = useInView(ref, { once: true });
 
   return (
-    <section id="apartaestudios" className="bg-bruma py-20 lg:py-28">
+    <section id="apartaestudios" className="bg-bruma dark:bg-gray-950 py-20 lg:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Encabezado */}
@@ -174,10 +174,10 @@ export function Apartaestudios() {
           <span className="inline-block font-inter text-xs font-semibold tracking-widest uppercase text-turquesa-500 mb-3">
             Elige tu modalidad
           </span>
-          <h2 className="font-poppins font-700 text-3xl sm:text-4xl text-carbon mb-4">
+          <h2 className="font-poppins font-700 text-3xl sm:text-4xl text-carbon dark:text-white mb-4">
             Nuestros apartaestudios
           </h2>
-          <p className="font-inter text-carbon/60 max-w-xl mx-auto leading-relaxed">
+          <p className="font-inter text-carbon/60 dark:text-white/60 max-w-xl mx-auto leading-relaxed">
             Dos opciones pensadas para distintas necesidades — ambas completamente amobladas y listas para habitar.
           </p>
         </motion.div>

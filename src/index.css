@@ -50,3 +50,7 @@
 ::-webkit-scrollbar-track { background: #F7F9F9; }
 ::-webkit-scrollbar-thumb { background: #C2B4A0; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #8E7E66; }
+
+.dark ::-webkit-scrollbar-track { background: #111827; }
+.dark ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 3px; }
+.dark ::-webkit-scrollbar-thumb:hover { background: #6b7280; }

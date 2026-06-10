@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import { Star } from 'lucide-react';
 import { NEGOCIO } from '../constants/negocio';
 
-// Testimonios de ejemplo — reemplaza con reseñas reales de Google Maps
 const TESTIMONIOS = [
   {
     nombre: 'Camila R.',
@@ -34,7 +33,7 @@ function Estrellas({ n }: { n: number }) {
         <Star
           key={i}
           size={14}
-          className={i < n ? 'text-amber-400 fill-amber-400' : 'text-piedra-200'}
+          className={i < n ? 'text-amber-400 fill-amber-400' : 'text-piedra-200 dark:text-gray-700'}
           aria-hidden="true"
         />
       ))}
@@ -44,7 +43,7 @@ function Estrellas({ n }: { n: number }) {
 
 export function Resenas() {
   return (
-    <section id="resenas" className="bg-white py-20 lg:py-28">
+    <section id="resenas" className="bg-white dark:bg-gray-900 py-20 lg:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Encabezado + badge de rating */}
@@ -53,17 +52,17 @@ export function Resenas() {
             <span className="inline-block font-inter text-xs font-semibold tracking-widest uppercase text-turquesa-500 mb-3">
               Lo que dicen nuestros huéspedes
             </span>
-            <h2 className="font-poppins font-700 text-3xl sm:text-4xl text-carbon">
+            <h2 className="font-poppins font-700 text-3xl sm:text-4xl text-carbon dark:text-white">
               Reseñas reales
             </h2>
           </div>
 
           {/* Badge de calificación */}
-          <div className="flex items-center gap-4 bg-amber-50 border border-amber-100 rounded-2xl px-6 py-4 shrink-0">
+          <div className="flex items-center gap-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-700/30 rounded-2xl px-6 py-4 shrink-0">
             <div className="text-center">
-              <p className="font-poppins font-800 text-3xl text-carbon">{NEGOCIO.rating}</p>
+              <p className="font-poppins font-800 text-3xl text-carbon dark:text-white">{NEGOCIO.rating}</p>
               <Estrellas n={Math.round(parseFloat(NEGOCIO.rating))} />
-              <p className="font-inter text-xs text-carbon/50 mt-1">{NEGOCIO.ratingCount} reseñas · Google</p>
+              <p className="font-inter text-xs text-carbon/50 dark:text-white/50 mt-1">{NEGOCIO.ratingCount} reseñas · Google</p>
             </div>
           </div>
         </div>
@@ -77,18 +76,18 @@ export function Resenas() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="bg-bruma rounded-2xl p-7 border border-piedra-100 flex flex-col gap-4"
+              className="bg-bruma dark:bg-gray-800 rounded-2xl p-7 border border-piedra-100 dark:border-white/10 flex flex-col gap-4"
             >
               <Estrellas n={t.estrellas} />
-              <p className="font-inter text-carbon/75 text-sm leading-relaxed flex-1 italic">
+              <p className="font-inter text-carbon/75 dark:text-white/75 text-sm leading-relaxed flex-1 italic">
                 "{t.texto}"
               </p>
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="font-poppins font-600 text-carbon text-sm">{t.nombre}</p>
-                  <p className="font-inter text-xs text-piedra-400">{t.fuente}</p>
+                  <p className="font-poppins font-600 text-carbon dark:text-white text-sm">{t.nombre}</p>
+                  <p className="font-inter text-xs text-piedra-400 dark:text-gray-500">{t.fuente}</p>
                 </div>
-                <span className="text-xs font-inter text-piedra-300 italic">
+                <span className="text-xs font-inter text-piedra-300 dark:text-gray-600 italic">
                   * Ejemplo — reemplazar con reseña real
                 </span>
               </div>

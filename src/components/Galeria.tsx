@@ -38,7 +38,7 @@ const FOTOS = [
     span:  'lg:col-span-2',
   },
   {
-    src:   null,            // bano.jpg — pendiente de fotografía
+    src:   null,
     slot:  'bano.jpg',
     alt:   'Baño moderno del apartaestudio en el Edificio HVO',
     label: 'Baño moderno',
@@ -51,7 +51,7 @@ export function Galeria() {
   const [selected, setSelected] = useState<number | null>(null);
 
   return (
-    <section id="galeria" className="bg-white py-20 lg:py-28">
+    <section id="galeria" className="bg-white dark:bg-gray-900 py-20 lg:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Encabezado */}
@@ -59,10 +59,10 @@ export function Galeria() {
           <span className="inline-block font-inter text-xs font-semibold tracking-widest uppercase text-turquesa-500 mb-3">
             Galería
           </span>
-          <h2 className="font-poppins font-700 text-3xl sm:text-4xl text-carbon mb-4">
+          <h2 className="font-poppins font-700 text-3xl sm:text-4xl text-carbon dark:text-white mb-4">
             Conoce el Edificio HVO
           </h2>
-          <p className="font-inter text-carbon/60 max-w-md mx-auto">
+          <p className="font-inter text-carbon/60 dark:text-white/60 max-w-md mx-auto">
             Espacios pensados para tu bienestar. Modernos, iluminados y completamente equipados.
           </p>
         </div>
@@ -77,7 +77,7 @@ export function Galeria() {
               viewport={{ once: true, margin: '-40px' }}
               transition={{ delay: i * 0.08, duration: 0.5 }}
               onClick={() => setSelected(i)}
-              className={`group relative rounded-2xl overflow-hidden cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-turquesa-400 focus:ring-offset-2 ${foto.span}`}
+              className={`group relative rounded-2xl overflow-hidden cursor-zoom-in focus:outline-none focus:ring-2 focus:ring-turquesa-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900 ${foto.span}`}
               aria-label={`Ver foto: ${foto.label}`}
             >
               {foto.src ? (
@@ -108,8 +108,8 @@ export function Galeria() {
 
         {/* Nota: visible solo mientras haya placeholders */}
         {FOTOS.some(f => !f.src) && (
-          <p className="text-center font-inter text-xs text-piedra-400 mt-6">
-            Pronto: fotos reales del edificio — copia los archivos .jpg en src/assets/ para activarlas
+          <p className="text-center font-inter text-xs text-piedra-400 dark:text-gray-500 mt-6">
+            Pronto: fotos reales del edificio — copia los archivos .jpg en src/img/ para activarlas
           </p>
         )}
       </div>
